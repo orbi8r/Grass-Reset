@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr4a1ninj6t34"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_30qjj"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_30qjj")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.7778
+
+[node name="Background" type="Panel" parent="AspectRatioContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="AspectRatioContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Email" type="LineEdit" parent="AspectRatioContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+placeholder_text = "Email"
+virtual_keyboard_type = 5
+clear_button_enabled = true
+
+[node name="Password" type="LineEdit" parent="AspectRatioContainer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+placeholder_text = "Password
+"
+virtual_keyboard_type = 6
+clear_button_enabled = true
+secret = true
+secret_character = "*"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Register" type="Button" parent="AspectRatioContainer/Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "Register"
+
+[node name="Login" type="Button" parent="AspectRatioContainer/Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "Login"
+
+[node name="Output" type="TextEdit" parent="AspectRatioContainer/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+
+[connection signal="pressed" from="AspectRatioContainer/Control/VBoxContainer/HBoxContainer/Register" to="." method="_on_register_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/Control/VBoxContainer/HBoxContainer/Login" to="." method="_on_login_pressed"]
