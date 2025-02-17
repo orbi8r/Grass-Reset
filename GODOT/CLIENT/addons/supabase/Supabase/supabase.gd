@@ -11,8 +11,8 @@ var storage : SupabaseStorage
 var debug: bool = false
 
 var config : Dictionary = {
-	"supabaseUrl": "",
-	"supabaseKey": ""
+	"supabaseUrl": SECURE.PROJECT_URL,
+	"supabaseKey": SECURE.ANON_KEY
 }
 
 var header : PackedStringArray = [
