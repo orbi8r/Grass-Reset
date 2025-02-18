@@ -11,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-ratio = 1.7778
+ratio = 2.0
 
 [node name="Background" type="Panel" parent="AspectRatioContainer"]
 layout_mode = 2
@@ -58,12 +58,10 @@ layout_mode = 2
 text = "Login"
 
 [node name="Output" type="TextEdit" parent="AspectRatioContainer/Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 editable = false
-
-[node name="HTTPRequestNode" type="HTTPRequest" parent="."]
-unique_name_in_owner = true
 
 [connection signal="pressed" from="AspectRatioContainer/Control/VBoxContainer/HBoxContainer/Register" to="." method="_on_register_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/Control/VBoxContainer/HBoxContainer/Login" to="." method="_on_login_pressed"]
