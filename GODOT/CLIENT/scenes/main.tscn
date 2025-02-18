@@ -62,5 +62,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 editable = false
 
+[node name="HTTPRequestNode" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+
 [connection signal="pressed" from="AspectRatioContainer/Control/VBoxContainer/HBoxContainer/Register" to="." method="_on_register_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/Control/VBoxContainer/HBoxContainer/Login" to="." method="_on_login_pressed"]

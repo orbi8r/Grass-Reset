@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Supabase="*res://addons/supabase/Supabase/supabase.gd"
 SECURE="*res://scripts/secure.gd"
+Supabase="*res://addons/supabase/Supabase/supabase.gd"
 
 [editor_plugins]
 

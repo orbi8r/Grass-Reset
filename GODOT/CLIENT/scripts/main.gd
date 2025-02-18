@@ -7,7 +7,8 @@ extends Node
 
 
 func _ready() -> void:
-	pass
+	Supabase.auth.connect("signed_up", Callable(self, "_on_signed_up"))
+	Supabase.auth.connect("signed_in", Callable(self, "_on_signed_in"))
 
 
 func _process(delta: float) -> void:
@@ -15,8 +16,18 @@ func _process(delta: float) -> void:
 
 
 func _on_register_pressed() -> void:
-	pass # Replace with function body.
+	Supabase.auth.sign_up(email.text, password.text)
 
 
 func _on_login_pressed() -> void:
-	pass # Replace with function body.
+	Supabase.auth.sign_in(email.text, password.text)
+
+
+func _on_signed_up():
+	print("Signed up!")
+	output.text = "Signed Up!"
+
+
+func _on_signed_in():
+	print("Signed in!")
+	output.text = "Signed In!"
