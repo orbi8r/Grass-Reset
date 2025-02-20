@@ -1,12 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="refresh" content="0; url=https://orbi8r.github.io/Grass-Reset/GODOT/LIVE/index.html">
-    <title>Redirecting...</title>
+  <meta charset="UTF-8">
+  <title>CAS Login Redirect</title>
 </head>
 <body>
-    <p>If you are not redirected, <a href="https://orbi8r.github.io/Grass-Reset/GODOT/LIVE/index.html">click here</a>.</p>
+  <div id="content">
+    <!-- Ticket and user data will be displayed here -->
+  </div>
+  <script>
+    // Helper function to get query parameters by name
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    // Get the 'ticket' parameter from the URL
+    const ticket = getQueryParam('ticket');
+    // Get the current page URL without any query parameters (this will be used as the service URL)
+    const currentUrl = window.location.origin + window.location.pathname;
+
+    // If no ticket is found, redirect to CAS login
+    if (!ticket) {
+      // Build the login URL: your institute's CAS login endpoint with the service parameter
+      const casLoginUrl = 'https://login.iiit.ac.in/cas/login?service=' + encodeURIComponent(currentUrl);
+      window.location.href = casLoginUrl;
+    } else {
+      // If a ticket is present, display it
+      document.getElementById('content').innerHTML = '<h2>CAS Ticket Received:</h2><p>' + ticket + '</p>';
+      
+      // Build the URL for ticket validation
+      const validateUrl = 'https://login.iiit.ac.in/cas/serviceValidate?ticket=' 
+                           + encodeURIComponent(ticket) 
+                           + '&service=' + encodeURIComponent(currentUrl);
+      
+      // Validate the ticket and fetch user data
+      fetch(validateUrl)
+        .then(response => response.text())
+        .then(data => {
+          // Parse the XML response from CAS
+          const parser = new DOMParser();
+          const xmlDoc = parser.parseFromString(data, "application/xml");
+          const userElement = xmlDoc.getElementsByTagName("cas:user")[0];
+          if (userElement) {
+            const user = userElement.textContent;
+            document.getElementById('content').innerHTML += '<h3>User Data:</h3><p>' + user + '</p>';
+          } else {
+            document.getElementById('content').innerHTML += '<p>No user data found.</p>';
+          }
+        })
+        .catch(error => {
+          document.getElementById('content').innerHTML += '<p>Error fetching user data: ' + error + '</p>';
+        });
+    }
+  </script>
 </body>
 </html>
-
-
